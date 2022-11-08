@@ -1,17 +1,30 @@
-import { BrowserRouter, Link } from 'react-router-dom';
-import { Router } from './router/Router';
+import axios from 'axios';
 
 export const App = () => {
+    const onClickUsers = () => {
+        axios
+            .get('https://jsonplaceholder.typicode.com/users')
+            .then((res) => {
+                console.log(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+    const onClickUser1 = () => {
+        axios
+            .get('https://jsonplaceholder.typicode.com/users?id=3')
+            .then((res) => {
+                console.log(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
     return (
-        <BrowserRouter>
-            <div className="App">
-                <Link to="/">Home</Link>
-                <br />
-                <Link to="/page1">Page1</Link>
-                <br />
-                <Link to="/page2">Page2</Link>
-            </div>
-            <Router></Router>
-        </BrowserRouter>
+        <div className="App">
+            <button onClick={onClickUsers}>users</button>
+            <button onClick={onClickUser1}>id=1のuser</button>
+        </div>
     );
 };
